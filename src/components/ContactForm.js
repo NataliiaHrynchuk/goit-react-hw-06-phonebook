@@ -1,7 +1,11 @@
 import React, {Component} from "react";
+import {Box} from './Box.styled';
+import {Label} from './Label.styled';
+import {Text} from './Text.styled';
+import {Button} from './Button.styled';
 
 
-class Form extends Component {
+class ContactForm extends Component {
     state = {
         name: '',
         number: ''
@@ -18,16 +22,7 @@ class Form extends Component {
     
     handleSubmit = event => {
         event.preventDefault();
-        console.log(this.state);
         this.props.onSubmit(this.state);
-        // const contact = {
-        //     id: nanoid(),
-        //     name: this.state.name,
-        //     number: this.state.number
-        // }
-        // this.setState(prevState => ({
-        //     contacts: [...prevState.contacts, contact],
-        // }));
         this.setState({
             name: '',
             number: ''});
@@ -36,34 +31,50 @@ class Form extends Component {
     render() {
         
         return (
-            <form onSubmit={this.handleSubmit}>
-                <label>
-                    Name <input 
+            <Box 
+                as="form"
+                border="0.5px solid rgb(112, 111, 111)"
+                display="inline-block"
+                w="200px" 
+                pad="20px 250px 20px 20px"
+                onSubmit={this.handleSubmit}
+                >
+                <Label htmlFor="id-name">
+                    Name </Label>
+                <Text 
                     type="text"
                     name="name" 
+                    id="id-name"
                     pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
                     title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                     required
                     value={this.state.name}
-                    onChange={this.handleNameChange} />
-                </label>
-
-                <label>
-                    Number <input
+                    mt="10px"
+                    mb="10px"
+                    onChange={this.handleNameChange}
+                    />
+                
+                <Label htmlFor="id-number">
+                    Number </Label>
+                <Text
                         type="tel"
                         name="number"
+                        id="id-numder"
                         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                         required
                         value={this.state.number}
-                        onChange={this.handleNumberChange}/>
-                </label>
+                        onChange={this.handleNumberChange}
+                        mt="10px"
+                        mb="10px"
+                        mr="120px"/>
+                
 
-                <button type="submit">Add contact</button>
-            </form>
+                <Button type="submit">Add contact</Button>
+            </Box>
 
         )
     }
 }
 
-export default Form;
+export default ContactForm;

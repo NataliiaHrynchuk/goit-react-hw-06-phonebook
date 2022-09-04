@@ -1,29 +1,33 @@
-// import React, {Component} from "react";
+import {Box} from './Box.styled';
+import {Button} from './Button.styled';
 
-export const ContactList = ({contacts}) => {
+export const ContactList = ({contacts, onDeleteContact}) => {
     
         return (
-            <ul>
-                {contacts.map(contact => (
-                    <li key={contact.id}>
-                        {contact.name}:{contact.number}
-                    </li>
+            <Box 
+                as="ul"
+                pad="0">
+                {contacts && contacts.map(({id, name, number}) => (
+                    <Box 
+                        key={id}
+                        as="li"
+                        display="flex"
+                        gap="10px"
+                        alIt="center"
+                    >
+                        <p>{name}:</p>
+                        <p>{number}</p>
+                        <Button 
+                            type="button"
+                            w="60px"
+                            onClick={() => onDeleteContact(id) }
+                        >Delete
+                        </Button>
+                    </Box>
                 ))}
                 
-            </ul>
+            </Box>
         )
     }
 
 
-
-// export const StatList = ({items}) => {
-   
-//     return (<List>
-//         {items.map(item => ( 
-//             <Item key={item.id} >
-//                 <Label>{item.label}</Label>
-//                 <Percentage>{item.percentage}%</Percentage>
-//             </Item>
-//         ))}
-//     </List>);
-//     };

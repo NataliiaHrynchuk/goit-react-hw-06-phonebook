@@ -1,36 +1,65 @@
 import React, {Component} from 'react';
-import Form from './components/Form';
+import ContactForm from './components/ContactForm';
 import {ContactList} from 'components/ContactList';
 import { nanoid } from 'nanoid';
+import {Box} from './components/Box.styled';
+import Filter from './components/Filter';
 
 
 class App extends Component {
   state = {
     contacts: [],
-    filter: ''
+    filterContacts: [],
+    name: '',
   }
 
-  addContact = information => {
-    console.log(information);
-    const contact = {
-      id: nanoid(),
-      name: information.name,
-      number: information.number
+  
+  addContact = (data) => {
+    const { name, number} = data;
+    const namesArray = this.state.contacts.map(contact => 
+      contact.name)
+    
+      if (namesArray.includes(name)) {
+        alert(`${name} is already in contacts.`)
+      } else {
+        const newContact = {
+          id: nanoid(),
+          name,
+          number,
+        };
+  
+        this.setState(prevState => ({
+          contacts: [...prevState.contacts, newContact],
+        }));
+      }
   }
-  this.setState(prevState => ({
-      contacts: [...prevState.contacts, contact],
-  })); 
+
+  findeContact = (name) => {
+    this.setState({filterContacts: this.state.contacts.filter(contact => 
+      contact.name.toUpperCase().includes(name.toUpperCase()))})
   }
+    
+  
+
+  deleteContact = contactId => {
+    this.setState(prevState => ({
+      filterContacts: prevState.filterContacts.filter(filterContact => filterContact.id !== contactId),
+    }))
+  }
+
+
   render() {
     return (
-      <div>
+      <Box pad="20px">
         <h1>Phonebook</h1>
-        <Form onSubmit={this.addContact}></Form>
+        <ContactForm onSubmit={this.addContact}></ContactForm>
         <h2>Contacts</h2>
-        {/* <Filter  />
-         */}
-         <ContactList contacts={this.state.contacts}/>
-      </div>
+        <Filter onChange={this.findeContact} />
+        <ContactList 
+          contacts={this.state.filterContacts}
+          onDeleteContact={this.deleteContact}
+        />
+      </Box>
       
     )
   }
