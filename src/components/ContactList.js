@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {Box} from './Box.styled';
 import {Button} from './Button.styled';
 
@@ -25,9 +26,12 @@ export const ContactList = ({contacts, onDeleteContact}) => {
                         </Button>
                     </Box>
                 ))}
-                
             </Box>
         )
     }
 
+    ContactList.propTypes = {
+        contacts: PropTypes.array,
+        onDeleteContact: PropTypes.func,
+    }
 
