@@ -12,26 +12,34 @@ class App extends Component {
     filter: '',
   }
 
-  
+  createNewContact = (newContact) => {
+    this.setState(prevState => ({
+      contacts: [...prevState.contacts, newContact],
+    }))
+  };
+
   addContact = (data) => {
     const { name, number} = data;
-    const namesArray = this.state.contacts.map(contact => 
-      contact.name)
-    
-      if (namesArray.includes(name)) {
-        alert(`${name} is already in contacts.`)
-      } else {
-        const newContact = {
-          id: nanoid(),
-          name,
-          number,
-        };
-  
-        this.setState(prevState => ({
-          contacts: [...prevState.contacts, newContact],
-        }));
-      }
-  };
+    const {contacts} = this.state;
+    const newContact = {
+      id: nanoid(),
+      name,
+      number,
+  }; 
+    console.log(contacts);
+    contacts.length > 0 
+      ? (
+      (contacts.find(contact => contact.name === name)) 
+        ? (
+          alert(`${name} is already in contacts.`))
+        : this.createNewContact(newContact)
+        ) 
+      : (
+          this.createNewContact(newContact)
+        );
+      
+  }
+      
 
   changeFilter = event => {
     this.setState({filter: event.currentTarget.value});
@@ -51,7 +59,7 @@ class App extends Component {
 
 
   render() {
-    const {filter} = this.state;
+    const {filter, contacts} = this.state;
     const visibleContacts = this.getVisibleContacts();
 
     return (
@@ -62,11 +70,18 @@ class App extends Component {
         <Filter 
           value={filter}
           onChange={this.changeFilter} />
-        {filter && 
+        {filter ? (
         <ContactList 
-          contacts={visibleContacts}
+          contacts={visibleContacts }
           onDeleteContact={this.deleteContact}
-        />}
+        />
+        ) : (
+        <ContactList 
+          contacts={contacts }
+          onDeleteContact={this.deleteContact}
+        />
+          )}
+        
       </Box>
     )
   }
