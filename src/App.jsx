@@ -25,19 +25,13 @@ class App extends Component {
       id: nanoid(),
       name,
       number,
-  }; 
-    console.log(contacts);
-    contacts.length > 0 
-      ? (
-      (contacts.find(contact => contact.name === name)) 
-        ? (
-          alert(`${name} is already in contacts.`))
-        : this.createNewContact(newContact)
-        ) 
-      : (
-          this.createNewContact(newContact)
-        );
-      
+    }; 
+        
+    if (contacts.find(contact => contact.name === name)) {
+      alert(`${ name } is already in contacts.`)
+      return
+  }
+  this.createNewContact(newContact)  
   }
       
 
