@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 const dynamicStyle = props =>
     css`
     width: ${props.w};
-    height: ${props.h}
+    height: ${props.h};
     `
 
 export const Button = styled.button`
