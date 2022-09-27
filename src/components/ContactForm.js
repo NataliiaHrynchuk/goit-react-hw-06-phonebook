@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import { useState } from "react";
 import {Box} from './Box.styled';
 import {Label} from './Label.styled';
@@ -6,42 +7,34 @@ import {Text} from './Text.styled';
 import {Button} from './Button.styled';
 
 
-export default function ContactForm () {
+export default function ContactForm ({onSubmit}) {
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
-    // state = {
-    //     name: '',
-    //     number: ''
-    // }
+    
 
     const handleChange = event => {
-        const {name, value} = event.currentTarget;
-        switch(name) {
+        const { name, value } = event.currentTarget;
+        switch (name) {
             case 'name':
-                setName(value);
+                setName(value.trim());
                 break;
             case 'number':
-                setNumber(value);
+                setNumber(value.trim());
                 break;
             default:
                 return;
         }
-    }
-
-    // const handleNumberChange = event => {
-    //     setNamber(event.currentTarget.value);
-    // }
+    };
     
     const handleSubmit = event => {
         event.preventDefault();
-        // this.props.onSubmit(this.state);
-        return Object({name, number});
+        const contact = {name, number};
+        onSubmit(contact);
+        setName(' ');
+        setNumber(' ');
         
     }
 
-    // render() {
-    //     const {name, number} = this.state;
-        
         return (
             <Box 
                 as="form"
@@ -81,11 +74,14 @@ export default function ContactForm () {
                         mb="10px"
                         mr="120px"/>
                 
-
                 <Button type="submit">Add contact</Button>
             </Box>
 
         )
-    }
+};
+
+ContactForm.propTypes = {
+    onSubmit: PropTypes.func,
+};
 
 
