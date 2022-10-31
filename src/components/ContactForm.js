@@ -4,10 +4,13 @@ import { useState } from "react";
 import {Box} from './Box.styled';
 import {Label} from './Label.styled';
 import {Text} from './Text.styled';
-import {Button} from './Button.styled';
+import { Button } from './Button.styled';
+import { useDispatch } from "react-redux";
+import { addContact } from "redux/action";
 
 
-export default function ContactForm ({onSubmit}) {
+export default function ContactForm({ onSubmit }) {
+    const dispatch = useDispatch();
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
     
@@ -29,7 +32,8 @@ export default function ContactForm ({onSubmit}) {
     const handleSubmit = event => {
         event.preventDefault();
         const contact = {name, number};
-        onSubmit(contact);
+        // onSubmit(contact);
+        dispatch(addContact(contact));
         setName(' ');
         setNumber(' ');
         
