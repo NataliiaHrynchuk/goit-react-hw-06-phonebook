@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
 import {Box} from './Box.styled';
-import {Button} from './Button.styled';
+import { Button } from './Button.styled';
+import { useSelector } from 'react-redux';
+import { getContact } from 'redux/selectors';
 
-export const ContactList = ({contacts, onDeleteContact}) => {
-    
+export const ContactList = ({onDeleteContact}) => {
+    const contacts = useSelector(getContact);
         return (
             <Box 
                 as="ul"
