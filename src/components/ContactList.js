@@ -1,11 +1,14 @@
-import PropTypes from 'prop-types';
 import {Box} from './Box.styled';
 import { Button } from './Button.styled';
 import { useSelector } from 'react-redux';
 import { getContact } from 'redux/selectors';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from 'redux/action';
 
-export const ContactList = ({onDeleteContact}) => {
+export const ContactList = () => {
+    const dispatch = useDispatch();
     const contacts = useSelector(getContact);
+    
         return (
             <Box 
                 as="ul"
@@ -23,7 +26,7 @@ export const ContactList = ({onDeleteContact}) => {
                         <Button 
                             type="button"
                             w="60px"
-                            onClick={() => onDeleteContact(id) }
+                            onClick={() => dispatch(deleteContact(id))}
                         >Delete
                         </Button>
                     </Box>
@@ -32,8 +35,5 @@ export const ContactList = ({onDeleteContact}) => {
         )
     }
 
-    ContactList.propTypes = {
-        contacts: PropTypes.array,
-        onDeleteContact: PropTypes.func,
-    }
+    
 
