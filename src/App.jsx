@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import ContactForm from './components/ContactForm';
 import {ContactList} from 'components/ContactList';
 import {Box} from './components/Box.styled';
@@ -6,13 +6,13 @@ import  {Filter}  from './components/Filter';
 
 
 export default function App() {
-  const [contacts, setContacts] = useState(
-    JSON.parse(localStorage.getItem('contacts')) ?? []
-  );
+  // const [contacts, setContacts] = useState(
+  //   JSON.parse(localStorage.getItem('contacts')) ?? []
+  // );
   
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
+  // useEffect(() => {
+  //   localStorage.setItem('contacts', JSON.stringify(contacts));
+  // }, [contacts]);
   
 
   return (
