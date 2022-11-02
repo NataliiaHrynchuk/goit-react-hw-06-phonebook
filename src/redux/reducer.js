@@ -1,8 +1,8 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { addContact, deleteContact } from "./action";
-import { contactInitialState, filterInitialState } from "./constatnts";
+import { addContact, deleteContact, setFilter } from "./action";
+import { contactsInitialState, filterInitialState } from "./constants";
 
-export const contactsReducer = createReducer(contactInitialState, {
+export const contactsReducer = createReducer(contactsInitialState, {
     [addContact]: (state, action) => {
         // return [...state, action.payload];
         state.push(action.payload);
@@ -13,5 +13,7 @@ export const contactsReducer = createReducer(contactInitialState, {
 });
 
 export const filterReducer = createReducer(filterInitialState, {
-
+    [setFilter]: (state, action) => {
+        state = action.payload;
+}
 })

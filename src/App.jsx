@@ -3,14 +3,19 @@ import ContactForm from './components/ContactForm';
 import {ContactList} from 'components/ContactList';
 import { nanoid } from 'nanoid';
 import {Box} from './components/Box.styled';
-import {Filter} from './components/Filter';
+import  {Filter}  from './components/Filter';
+import { useSelector } from 'react-redux';
+// import { setFilter } from 'redux/filterSlice';
+import { getFilter } from 'redux/selectors';
 
 
 export default function App() {
   const [contacts, setContacts] = useState(
     JSON.parse(localStorage.getItem('contacts')) ?? []
   );
-  const [filter, setFilter] = useState('');
+  // const [filter, setFilter] = useState('');
+  const filter = useSelector(getFilter);
+  // const dispatch = useDispatch();
 
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
@@ -31,37 +36,33 @@ export default function App() {
       :setContacts([...contacts, newContact]);
   };
       
-  const changeFilter = event => {
-    setFilter(event.currentTarget.value);
-  };
+  // const changeFilter = event => {
+  //   dispatch(setFilter(event.currentTarget.value));
+  // };
 
   const getVisibleContacts = () => {
     const normalizedFilter = filter.toLowerCase();
     return contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
   };
 
-  const deleteContact = contactId => {
-    setContacts(contacts.filter(contact => contact.id !== contactId));
-    setFilter('');
-  };
-
-    return (
+  return (
       <Box pad="20px">
         <h1>Phonebook</h1>
         <ContactForm onSubmit={addContact}></ContactForm>
         <h2>Contacts</h2>
         <Filter 
           value={filter}
-          onChange={changeFilter} />
+      // onChange={changeFilter} 
+      />
         {filter ? (
         <ContactList 
           contacts={getVisibleContacts()}
-          onDeleteContact={deleteContact}
+          // onDeleteContact={deleteContact}
         />
         ) : (
         <ContactList 
           contacts={contacts }
-          onDeleteContact={deleteContact}
+          // onDeleteContact={deleteContact}
         />
         )}
         

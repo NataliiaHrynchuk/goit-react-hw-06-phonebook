@@ -6,10 +6,10 @@ import {Label} from './Label.styled';
 import {Text} from './Text.styled';
 import { Button } from './Button.styled';
 import { useDispatch } from "react-redux";
-import { addContact } from "redux/action";
+import { addContact } from "redux/contactsSlice";
 
 
-export default function ContactForm({ onSubmit }) {
+export default function ContactForm() {
     const dispatch = useDispatch();
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
