@@ -2,18 +2,25 @@ import {Box} from './Box.styled';
 import { Button } from './Button.styled';
 import { useSelector } from 'react-redux';
 import { getContact } from 'redux/selectors';
+import { getFilter } from 'redux/selectors';
 import { useDispatch } from 'react-redux';
 import { deleteContact } from 'redux/contactsSlice';
 
 export const ContactList = () => {
     const dispatch = useDispatch();
     const contacts = useSelector(getContact);
-    
+    const filter = useSelector(getFilter).toLowerCase();
+    const getVisibleContacts =
+        filter ?
+            (contacts.filter(contact => contact.name.toLowerCase().includes(filter)))
+            :
+            (contacts);
+        
         return (
             <Box 
                 as="ul"
                 pad="0">
-                {contacts && contacts.map(({id, name, number}) => (
+                {getVisibleContacts && getVisibleContacts.map(({id, name, number}) => (
                     <Box 
                         key={id}
                         as="li"
