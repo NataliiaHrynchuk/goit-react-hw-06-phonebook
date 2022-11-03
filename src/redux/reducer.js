@@ -4,7 +4,6 @@ import { contactsInitialState, filterInitialState } from "./constants";
 
 export const contactsReducer = createReducer(contactsInitialState, {
     [addContact]: (state, action) => {
-        // return [...state, action.payload];
         state.push(action.payload);
     },
     [deleteContact]: (state, action) => {
