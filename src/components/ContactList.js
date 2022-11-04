@@ -1,10 +1,10 @@
-import {Box} from './Box.styled';
-import { Button } from './Button.styled';
+import {Box} from 'components/Box.styled';
+import { Button } from 'components/Button.styled';
 import { useSelector } from 'react-redux';
-import { getContact } from 'redux/selectors';
-import { getFilter } from 'redux/selectors';
+import { getContact } from 'redux/contacts/contactsSelectors';
+import { getFilter } from 'redux/filter/filterSelectors';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/contactsSlice';
+import { deleteContact } from 'redux/contacts/contactsSlice';
 
 export const ContactList = () => {
     const dispatch = useDispatch();
@@ -15,12 +15,13 @@ export const ContactList = () => {
             (contacts.filter(contact => contact.name.toLowerCase().includes(filter)))
             :
             (contacts);
-        
+            
         return (
+            
             <Box 
                 as="ul"
                 pad="0">
-                {getVisibleContacts && getVisibleContacts.map(({id, name, number}) => (
+                 {getVisibleContacts.map(({id, name, number}) => (
                     <Box 
                         key={id}
                         as="li"
@@ -39,8 +40,7 @@ export const ContactList = () => {
                     </Box>
                 ))}
             </Box>
-        )
+                )
     }
 
-    
 

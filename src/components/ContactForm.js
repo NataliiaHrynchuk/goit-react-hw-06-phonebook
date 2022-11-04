@@ -5,9 +5,9 @@ import {Label} from './Label.styled';
 import {Text} from './Text.styled';
 import { Button } from './Button.styled';
 import { useDispatch } from "react-redux";
-import { addContact } from "redux/contactsSlice";
+import { addContact } from "redux/contacts/contactsSlice";
 import { useSelector } from "react-redux";
-import { getContact } from 'redux/selectors';
+import { getContact } from 'redux/contacts/contactsSelectors';
 
 
 export default function ContactForm() {
@@ -43,11 +43,10 @@ export default function ContactForm() {
             alert(`${number} is already in contacts.`);
         } else {
             dispatch(addContact(newContact));
-        };
             setName(' ');
             setNumber(' ');
-        
-        }
+        };
+    }
 
         return (
             <Box
@@ -90,6 +89,5 @@ export default function ContactForm() {
                 
                 <Button type="submit">Add contact</Button>
             </Box>
-
         )
     };

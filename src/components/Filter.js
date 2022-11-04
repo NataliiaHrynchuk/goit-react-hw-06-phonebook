@@ -1,9 +1,9 @@
 import {Text} from './Text.styled';
 import {Label} from './Label.styled';
 import { Box } from './Box.styled';
-import { getFilter } from 'redux/selectors';
+import { getFilter } from 'redux/filter/filterSelectors';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilter } from 'redux/filterSlice';
+import { setFilter } from 'redux/filter/filterSlice';
 
 
 export const Filter = () => {
