@@ -9,5 +9,4 @@ const dynamicStyle = props =>
 
 export const Button = styled.button`
 ${dynamicStyle};
-
 `
