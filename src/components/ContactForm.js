@@ -9,7 +9,6 @@ import { addContact } from "redux/contacts/contactsSlice";
 import { useSelector } from "react-redux";
 import { getContact } from 'redux/contacts/contactsSelectors';
 
-
 export default function ContactForm() {
     const dispatch = useDispatch();
     const [name, setName] = useState('');
