@@ -1,11 +1,10 @@
 import React from 'react';
-import ContactForm from './components/ContactForm';
+import ContactForm from 'components/ContactForm';
 import { useSelector } from 'react-redux';
 import { getContact } from 'redux/contacts/contactsSelectors';
 import {ContactList} from 'components/ContactList';
 import {Box} from 'components/Box.styled';
 import  {Filter}  from 'components/Filter';
-
 
 export default function App() {
   const contacts = useSelector(getContact);
@@ -23,5 +22,3 @@ export default function App() {
       </Box>
     )
 }; 
-
-  
