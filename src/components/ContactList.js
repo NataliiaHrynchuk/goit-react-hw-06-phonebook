@@ -16,31 +16,31 @@ export const ContactList = () => {
             :
             (contacts);
             
-        return (
+    return (
             
-            <Box 
-                as="ul"
-                pad="0">
-                 {getVisibleContacts.map(({id, name, number}) => (
-                    <Box 
-                        key={id}
-                        as="li"
-                        display="flex"
-                        gap="10px"
-                        alIt="center"
-                    >
-                        <p>{name}:</p>
-                        <p>{number}</p>
-                        <Button 
-                            type="button"
-                            w="60px"
-                            onClick={() => dispatch(deleteContact(id))}
-                        >Delete
-                        </Button>
-                    </Box>
-                ))}
-            </Box>
-                )
-    }
+        <Box
+            as="ul"
+            pad="0">
+            {getVisibleContacts.map(({ id, name, number }) => (
+                <Box
+                    key={id}
+                    as="li"
+                    display="flex"
+                    gap="10px"
+                    alIt="center"
+                >
+                    <p>{name}:</p>
+                    <p>{number}</p>
+                    <Button
+                        type="button"
+                        w="60px"
+                        onClick={() => dispatch(deleteContact(id))}
+                    >Delete
+                    </Button>
+                </Box>
+            ))}
+        </Box>
+    )
+};
 
 
